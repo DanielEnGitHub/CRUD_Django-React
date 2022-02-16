@@ -16,5 +16,5 @@ class Solicitud(models.Model):
     razones = models.TextField()
 
     def __str__(self):
-        return self.persona
+        return self.persona.nombre
     
