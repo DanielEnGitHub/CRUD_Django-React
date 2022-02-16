@@ -3,8 +3,15 @@ import Buttons from '../Buttons/Buttons'
 import Modal from '../Modal/Modal'
 
 
-
+const initialForm = {
+    nombre: '',
+    genero: '',
+    edad_aproximada: '',
+    fecha_rescate: '',
+    persona: '',
+}
 const Table = () => {
+    const [formEdit, setFormEdit] = useState(initialForm);
     const [data, setData] = useState([])
 
     const peticion = async () => {
@@ -17,14 +24,14 @@ const Table = () => {
     useEffect(() => {
         peticion();
     }, [])
-    
-    
 
     return (
         <div className="container">
             <Modal
-                titulo = 'Agregar Macota'
                 setData = {setData}
+                data = {data}
+                formEdit = {formEdit}
+                setFormEdit = {setFormEdit}
             />
             <table className="table table-hover">
                 <thead>
@@ -50,10 +57,14 @@ const Table = () => {
                                     <td>{_data.fecha_rescate}</td>
                                     <td>{_data.persona}</td>
                                     <td>
-                                        <Buttons 
+                                        <Buttons
                                             nombre = 'Editar'
                                             typeBTN = 'outline-warning'
                                             id = {_data.id}
+                                            setData = {setData}
+                                            data_toggle = 'modal'
+                                            data_target = '#editar'
+                                            setFormEdit = {setFormEdit}
                                         />
                                         <Buttons 
                                             nombre = 'Eliminar'

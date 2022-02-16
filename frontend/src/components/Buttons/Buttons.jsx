@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-const Buttons = ({ nombre, typeBTN, setTittle = ()=>{}, id = null, setData, data_toggle = null, data_target = null }) => {
+const Buttons = ({ nombre, typeBTN, setTittle = ()=>{}, id = null, setData, data_toggle = null, data_target = null, peticionEdit = null, setFormEdit = () => {} }) => {    const [form, setForm] = useState({});
     const handleClic = () =>{
         const peticion = async () => {
             await fetch(`http://127.0.0.1:8000/api/mascotas/${id}`,{
@@ -34,11 +34,17 @@ const Buttons = ({ nombre, typeBTN, setTittle = ()=>{}, id = null, setData, data
                         'success'
                         )
                     }
-                })
-                
-            }else if (nombre === 'Editar'){
-                console.log('Editar');
+                })   
+            }else if(nombre === 'Editar'){
+                const peticionFrom = async () => {
+                    const response = await fetch(`http://127.0.0.1:8000/api/mascotas/${id}`);
+                    const data = await response.json();
+
+                    setFormEdit(data);
                 }
+
+                peticionFrom();
+            }
         }else{
             setTittle(nombre);
         }
