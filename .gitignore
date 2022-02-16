@@ -1,0 +1,31 @@
+# BACKEND
+backend/apps/__pycache__/
+backend/api/__pycache__/
+backend/apps/mascotas/__pycache__/
+backend/apps/personas/migrations/__pycache__/
+backend/!apps/mascotas/migrations/__init__.py
+backend/!apps/personas/migrations/__init__.py
+env/
+
+# FRONTEND
+# dependencies
+frontend/node_modules
+frontend/.pnp
+frontend/.pnp.js
+
+# testing
+frontend/coverage
+
+# production
+frontend/build
+
+# misc
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
