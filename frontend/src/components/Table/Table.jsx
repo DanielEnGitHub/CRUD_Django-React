@@ -8,10 +8,9 @@ const Table = () => {
 
     const peticion = async () => {
         const response = await fetch('http://127.0.0.1:8000/api/mascotas/');
-        const data = await response.json();
+        const dataApi = await response.json();
         
-        console.log(data);
-        return data;
+        setData(dataApi);
     }
 
     useEffect(() => {
@@ -26,27 +25,36 @@ const Table = () => {
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Mascota</th>
+                    <th scope="col">Persona</th>
+                    <th scope="col">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>
-                        <Buttons 
-                            nombre = 'Editar'
-                            typeBTN = 'outline-warning'
-                        />
-                        <Buttons 
-                            nombre = 'Eliminar'
-                            typeBTN = 'outline-danger'
-                        />
-                    </td>
-                </tr>
+                    {
+                        data.map( (_data) => {
+                            return (
+                                <tr key={_data.id}>
+                                    <th scope="row">{_data.id}</th>
+                                    <td>{_data.nombre}</td>
+                                    <td>{_data.persona}</td>
+                                    <td>
+                                        <Buttons 
+                                            nombre = 'Editar'
+                                            typeBTN = 'outline-warning'
+                                            id = {_data.id}
+                                        />
+                                        <Buttons 
+                                            nombre = 'Eliminar'
+                                            typeBTN = 'outline-danger'
+                                            id = {_data.id}
+                                        />
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+ 
                 </tbody>
                 <tfoot>
                     <tr>
