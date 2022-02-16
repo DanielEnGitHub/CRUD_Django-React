@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Buttons from '../Buttons/Buttons'
+import Modal from '../Modal/Modal'
 
 
 
@@ -21,14 +22,21 @@ const Table = () => {
 
     return (
         <div className="container">
-            <table className="table table-striped">
+            <Modal
+                titulo = 'Agregar Macota'
+                setData = {setData}
+            />
+            <table className="table table-hover">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Mascota</th>
-                    <th scope="col">Persona</th>
-                    <th scope="col">Acciones</th>
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre Mascota</th>
+                        <th scope="col">Genero</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Fecha Adopcion</th>
+                        <th scope="col">Persona</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {
@@ -37,6 +45,9 @@ const Table = () => {
                                 <tr key={_data.id}>
                                     <th scope="row">{_data.id}</th>
                                     <td>{_data.nombre}</td>
+                                    <td>{_data.genero}</td>
+                                    <td>{_data.edad_aproximada}</td>
+                                    <td>{_data.fecha_rescate}</td>
                                     <td>{_data.persona}</td>
                                     <td>
                                         <Buttons 
@@ -48,6 +59,7 @@ const Table = () => {
                                             nombre = 'Eliminar'
                                             typeBTN = 'outline-danger'
                                             id = {_data.id}
+                                            setData = {setData}
                                         />
                                     </td>
                                 </tr>
@@ -58,10 +70,13 @@ const Table = () => {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>
+                        <td colSpan={7}>
                             <Buttons 
                                 nombre = 'Agregar'
                                 typeBTN = 'outline-success'
+                                setData = {setData}
+                                data_toggle = 'modal'
+                                data_target = '#agregar'
                             />
                         </td>
                     </tr>
